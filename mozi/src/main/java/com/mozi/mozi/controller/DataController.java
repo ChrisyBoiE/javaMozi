@@ -1,9 +1,5 @@
 package com.mozi.mozi.controller;
 
-import com.mozi.mozi.model.Eloadas;
-import com.mozi.mozi.model.Film;
-import com.mozi.mozi.model.Mozi;
-import com.mozi.mozi.model.User;
 import com.mozi.mozi.repository.EloadasRepository;
 import com.mozi.mozi.repository.FilmRepository;
 import com.mozi.mozi.repository.MoziRepository;
@@ -12,8 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import jakarta.servlet.http.HttpSession;
-import java.util.List;
+import java.util.Collections;
 
 @Controller
 public class DataController {
@@ -28,32 +23,28 @@ public class DataController {
     private MoziRepository moziRepository;
 
     @GetMapping("/data")
-    public String showData(Model model, HttpSession session) {
-        // Ellenőrizd, hogy a felhasználó be van-e jelentkezve
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            // Ha nincs bejelentkezve, irányítsd át a login oldalra
-            return "redirect:/login";
-        }
-
+    public String showData(Model model) {
+        // Filmek lekérdezése
         try {
-            // Filmek lekérdezése
-            List<Film> films = filmRepository.findAll();
-            model.addAttribute("films", films);
-
-            // Előadások lekérdezése
-            List<Eloadas> eloadasok = eloadasRepository.findAll();
-            model.addAttribute("eloadasok", eloadasok);
-
-            // Mozik lekérdezése
-            List<Mozi> mozik = moziRepository.findAll();
-            model.addAttribute("mozik", mozik);
-
-            return "data"; // data.html sablon
+            model.addAttribute("films", filmRepository.findAll());
         } catch (Exception e) {
-            // Hiba esetén irányítsd át a hibaoldalra
-            e.printStackTrace();
-            return "redirect:/error";
+            model.addAttribute("films", Collections.emptyList());
         }
+
+        // Előadások lekérdezése
+        try {
+            model.addAttribute("eloadasok", eloadasRepository.findAll());
+        } catch (Exception e) {
+            model.addAttribute("eloadasok", Collections.emptyList());
+        }
+
+        // Mozik lekérdezése
+        try {
+            model.addAttribute("mozik", moziRepository.findAll());
+        } catch (Exception e) {
+            model.addAttribute("mozik", Collections.emptyList());
+        }
+
+        return "data"; // data.html sablon
     }
 }

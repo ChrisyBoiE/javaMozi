@@ -1,73 +1,77 @@
 package com.mozi.mozi.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
 
 @Entity
+@Table(name = "eloadas")
 public class Eloadas {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Automatikusan generált id
+    @Column(name = "id")
+    private Long id;
 
-    private LocalDate datum;
-    private int nezoszam;
-    private int bevetel;
+    @Column(name = "film_id") // Az oszlop pontos neve az adatbázisban
+    private Long filmId;
 
-    @ManyToOne
-    @JoinColumn(name = "film_id")
-    private Film film;
+    @Column(name = "mozi_id")
+    private Long moziId;
 
-    @ManyToOne
-    @JoinColumn(name = "mozi_id")
-    private Mozi mozi;
+    @Column(name = "datum")
+    private String datum;
 
-    // Getterek és Setterek
-    public int getId() {
+    @Column(name = "nezoszam")
+    private Integer nezoszam;
+
+    @Column(name = "bevetel")
+    private Double bevetel;
+
+    // Getterek és setterek
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public LocalDate getDatum() {
+    public Long getFilmId() {
+        return filmId;
+    }
+
+    public void setFilmId(Long filmId) {
+        this.filmId = filmId;
+    }
+
+    public Long getMoziId() {
+        return moziId;
+    }
+
+    public void setMoziId(Long moziId) {
+        this.moziId = moziId;
+    }
+
+    public String getDatum() {
         return datum;
     }
 
-    public void setDatum(LocalDate datum) {
+    public void setDatum(String datum) {
         this.datum = datum;
     }
 
-    public int getNezoszam() {
+    public Integer getNezoszam() {
         return nezoszam;
     }
 
-    public void setNezoszam(int nezoszam) {
+    public void setNezoszam(Integer nezoszam) {
         this.nezoszam = nezoszam;
     }
 
-    public int getBevetel() {
+    public Double getBevetel() {
         return bevetel;
     }
 
-    public void setBevetel(int bevetel) {
+    public void setBevetel(Double bevetel) {
         this.bevetel = bevetel;
-    }
-
-    public Film getFilm() {
-        return film;
-    }
-
-    public void setFilm(Film film) {
-        this.film = film;
-    }
-
-    public Mozi getMozi() {
-        return mozi;
-    }
-
-    public void setMozi(Mozi mozi) {
-        this.mozi = mozi;
     }
 }
