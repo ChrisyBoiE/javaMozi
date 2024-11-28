@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adatok</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+</head>
+<body>
+<!-- Navigációs sáv -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">Mozi Portál</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <!-- Bejelentkezett felhasználó neve -->
+                <li class="nav-item" th:if="${session.user != null}">
+                    <span class="navbar-text text-white me-3">Bejelentkezett: <b th:text="${session.user.username}"></b></span>
+                </li>
+                <!-- Adatok -->
+                <li class="nav-item" th:if="${session.user != null}">
+                    <a class="nav-link" href="/data">Adatok</a>
+                </li>
+                <!-- Kapcsolat -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Kapcsolat</a>
+                </li>
+                <!-- Admin üzenetek -->
+                <li class="nav-item" th:if="${session.user != null && session.user.role == 'ADMIN'}">
+                    <a class="nav-link" href="/messages">Üzenetek</a>
+                </li>
+                <!-- Kilépés -->
+                <li class="nav-item" th:if="${session.user != null}">
+                    <a class="nav-link" href="/auth/logout">Kilépés</a>
+                </li>
+                <!-- Bejelentkezés és regisztráció -->
+                <li class="nav-item" th:if="${session.user == null}">
+                    <a class="nav-link" href="/login">Bejelentkezés</a>
+                </li>
+                <li class="nav-item" th:if="${session.user == null}">
+                    <a class="nav-link" href="/register">Regisztráció</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container mt-5">
+    <h1 class="mb-4">Adatok az adatbázisból</h1>
+
+    <!-- Filmek táblázat -->
+    <h2>Filmek</h2>
+    <table id="filmTable" class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Cím</th>
+            <th>Év</th>
+            <th>Hossz</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="film : ${films}">
+            <td th:text="${film.id}"></td>
+            <td th:text="${film.cim}"></td>
+            <td th:text="${film.ev}"></td>
+            <td th:text="${film.hossz}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Előadások táblázat -->
+    <h2>Előadások</h2>
+    <table id="eloadasTable" class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Film ID</th>
+            <th>Mozi ID</th>
+            <th>Dátum</th>
+            <th>Nézőszám</th>
+            <th>Bevétel</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="eloadas : ${eloadasok}">
+            <td th:text="${eloadas.id}"></td>
+            <td th:text="${eloadas.filmid}"></td>
+            <td th:text="${eloadas.moziid}"></td>
+            <td th:text="${eloadas.datum}"></td>
+            <td th:text="${eloadas.nezoszam}"></td>
+            <td th:text="${eloadas.bevetel}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Mozik táblázat -->
+    <h2>Mozik</h2>
+    <table id="moziTable" class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Név</th>
+            <th>Város</th>
+            <th>Férőhely</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="mozi : ${mozik}">
+            <td th:text="${mozi.id}"></td>
+            <td th:text="${mozi.nev}"></td>
+            <td th:text="${mozi.varos}"></td>
+            <td th:text="${mozi.ferohely}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<!-- DataTables inicializálás -->
+<script>
+    $(document).ready(function () {
+        $('#filmTable').DataTable({
+            "pageLength": 25, // 25 sor oldalanként
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.5/i18n/Hungarian.json"
+            }
+        });
+
+        $('#eloadasTable').DataTable({
+            "pageLength": 25,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.5/i18n/Hungarian.json"
+            }
+        });
+
+        $('#moziTable').DataTable({
+            "pageLength": 25,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.5/i18n/Hungarian.json"
+            }
+        });
+    });
+</script>
+<footer class="bg-dark text-white text-center py-3">
+    <p>&copy; 2024 Mozi Portál. Minden jog fenntartva.</p>
+</footer>
+</body>
+</html>
