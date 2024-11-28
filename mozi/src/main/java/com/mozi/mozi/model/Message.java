@@ -1,12 +1,10 @@
 package com.mozi.mozi.model;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
-
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "message")
+@Table(name = "messages")
 public class Message {
 
     @Id
@@ -23,13 +21,12 @@ public class Message {
     private String subject;
 
     @Column(nullable = false, columnDefinition = "TEXT")
-    private String message;
+    private String messageContent;
 
-    @CreationTimestamp
     @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    // Getterek és Setterek
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -62,12 +59,12 @@ public class Message {
         this.subject = subject;
     }
 
-    public String getMessage() {
-        return message;
+    public String getMessageContent() {
+        return messageContent;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMessageContent(String messageContent) {
+        this.messageContent = messageContent;
     }
 
     public LocalDateTime getCreatedAt() {

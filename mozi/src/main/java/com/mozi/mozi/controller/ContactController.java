@@ -22,19 +22,18 @@ public class ContactController {
 
     @PostMapping
     public String submitContactForm(@ModelAttribute("message") Message message, Model model) {
-        // Ellenőrizd, hogy a mezők nem üresek
+        // Egyszerű validáció
         if (message.getName() == null || message.getEmail() == null ||
-                message.getSubject() == null || message.getMessage() == null) {
+                message.getSubject() == null || message.getMessageContent() == null) {
             model.addAttribute("errorMessage", "Minden mezőt ki kell tölteni!");
             return "contact";
         }
 
-        // Adat mentése
+        // Adatok mentése az adatbázisba
         messageRepository.save(message);
 
-        // Sikeres üzenet visszaküldése
-        model.addAttribute("successMessage", "Az üzenetedet sikeresen elküldtük!");
+        // Sikeres visszajelzés
+        model.addAttribute("successMessage", "Az üzenet sikeresen elküldve!");
         return "contact";
     }
-
 }
