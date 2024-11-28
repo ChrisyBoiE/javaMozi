@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mozi Portál - Kezdőlap</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<!-- Navigációs sáv -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="/">Mozi Portál</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item" th:if="${session.user == null}">
+          <a class="nav-link" href="/register">Regisztráció</a>
+        </li>
+        <li class="nav-item" th:if="${session.user == null}">
+          <a class="nav-link" href="/login">Bejelentkezés</a>
+        </li>
+        <li class="nav-item" th:if="${session.user != null}">
+          <a class="nav-link disabled">Üdv, <span th:text="${session.user.username}">Felhasználó</span></a>
+        </li>
+        <li class="nav-item" th:if="${session.user != null}">
+          <a class="nav-link" href="/auth/logout">Kilépés</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero szekció -->
+<div class="hero text-white d-flex align-items-center" style="background: url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200') no-repeat center center; background-size: cover; height: 90vh;">
+  <div class="container text-center">
+    <h1 class="display-4">Üdvözlünk a Mozi Portálon!</h1>
+    <p class="lead">A legjobb filmek és mozik egy helyen. Foglalj jegyet most!</p>
+    <a href="/films" class="btn btn-primary btn-lg mt-3">Fedezd fel a filmeket</a>
+  </div>
+</div>
+
+<!-- Szolgáltatások szekció -->
+<section class="container py-5">
+  <div class="row text-center">
+    <h2 class="mb-4">Fedezd fel szolgáltatásainkat</h2>
+    <div class="col-md-4">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1598899134739-79a6f6fdb299?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400" class="card-img-top" alt="Filmek">
+        <div class="card-body">
+          <h5 class="card-title">Filmek</h5>
+          <p class="card-text">Tekintsd meg a legújabb és klasszikus filmeket mozijainkban.</p>
+          <a href="/films" class="btn btn-primary">Tovább</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400" class="card-img-top" alt="Mozik">
+        <div class="card-body">
+          <h5 class="card-title">Mozik</h5>
+          <p class="card-text">Ismerd meg mozijainkat és válaszd ki a számodra legmegfelelőbbet.</p>
+          <a href="/mozik" class="btn btn-primary">Tovább</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1609460097812-1c661c7c924e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400" class="card-img-top" alt="Jegyek">
+        <div class="card-body">
+          <h5 class="card-title">Jegyek</h5>
+          <p class="card-text">Vásárolj jegyeket online, kényelmesen és gyorsan.</p>
+          <a href="/" class="btn btn-primary">Tovább</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lábléc -->
+<footer class="bg-dark text-white text-center py-3">
+  <p>&copy; 2024 Mozi Portál. Minden jog fenntartva.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
