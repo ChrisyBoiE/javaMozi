@@ -17,15 +17,20 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
+        <!-- Felhasználói üdvözlés, ha be van jelentkezve -->
+        <li class="nav-item" th:if="${session.user != null}">
+          <span class="navbar-text text-white me-3">Bejelentkezett: <b th:text="${session.user.username}">Felhasználó</b></span>
+        </li>
+
+        <!-- Látogató (nincs bejelentkezve) -->
         <li class="nav-item" th:if="${session.user == null}">
           <a class="nav-link" href="/register">Regisztráció</a>
         </li>
         <li class="nav-item" th:if="${session.user == null}">
           <a class="nav-link" href="/login">Bejelentkezés</a>
         </li>
-        <li class="nav-item" th:if="${session.user != null}">
-          <a class="nav-link disabled">Üdv, <span th:text="${session.user.username}">Felhasználó</span></a>
-        </li>
+
+        <!-- Kilépés -->
         <li class="nav-item" th:if="${session.user != null}">
           <a class="nav-link" href="/auth/logout">Kilépés</a>
         </li>
@@ -33,6 +38,8 @@
     </div>
   </div>
 </nav>
+
+
 
 <!-- Hero szekció -->
 <div class="hero text-white d-flex align-items-center" style="background: url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200') no-repeat center center; background-size: cover; height: 90vh;">

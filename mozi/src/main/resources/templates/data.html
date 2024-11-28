@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adatok</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<!-- Navigáció -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">Mozi Portál</a>
+    </div>
+</nav>
+
+<!-- Tartalom -->
+<div class="container mt-5">
+    <h1 class="mb-4">Adatok az adatbázisból</h1>
+
+    <!-- Filmek táblázat -->
+    <h2>Filmek</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Cím</th>
+            <th>Év</th>
+            <th>Hossz (perc)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="film : ${films}">
+            <td th:text="${film.id}"></td>
+            <td th:text="${film.cim}"></td>
+            <td th:text="${film.ev}"></td>
+            <td th:text="${film.hossz}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Előadások táblázat -->
+    <h2>Előadások</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Film ID</th>
+            <th>Mozi ID</th>
+            <th>Dátum</th>
+            <th>Nézőszám</th>
+            <th>Bevétel</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="eloadas : ${eloadasok}">
+            <td th:text="${eloadas.id}"></td>
+            <td th:text="${eloadas.filmid}"></td>
+            <td th:text="${eloadas.moziid}"></td>
+            <td th:text="${eloadas.datum}"></td>
+            <td th:text="${eloadas.nezoszam}"></td>
+            <td th:text="${eloadas.bevetel}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Mozik táblázat -->
+    <h2>Mozik</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Név</th>
+            <th>Város</th>
+            <th>Férőhely</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="mozi : ${mozik}">
+            <td th:text="${mozi.id}"></td>
+            <td th:text="${mozi.nev}"></td>
+            <td th:text="${mozi.varos}"></td>
+            <td th:text="${mozi.ferohely}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

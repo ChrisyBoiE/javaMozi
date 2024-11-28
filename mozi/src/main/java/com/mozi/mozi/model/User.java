@@ -11,7 +11,7 @@ public class User {
 
     private String username;
     private String password;
-    private String role; // Például: ADMIN, USER, VISITOR
+    private String role; // ADMIN, USER, VISITOR
 
     // Getterek és Setterek
     public int getId() {

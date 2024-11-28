@@ -100,3 +100,8 @@ footer {
 .card-text {
     color: #555;
 }
+.nav-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

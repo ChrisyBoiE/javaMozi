@@ -25,6 +25,7 @@ public class AuthController {
         return response;
     }
 
+
     @PostMapping("/login")
     public Map<String, String> login(@RequestBody User user, HttpSession session) {
         User foundUser = userService.findByUsername(user.getUsername())
@@ -34,11 +35,15 @@ public class AuthController {
             throw new RuntimeException("Hibás jelszó!");
         }
 
-        session.setAttribute("user", foundUser); // Felhasználó mentése a session-be
+        // Felhasználó és szerep eltárolása a session-ben
+        session.setAttribute("user", foundUser);
+
         Map<String, String> response = new HashMap<>();
         response.put("message", "Sikeres bejelentkezés!");
+        response.put("role", foundUser.getRole());
         return response;
     }
+
 
 
     @PostMapping("/logout")
