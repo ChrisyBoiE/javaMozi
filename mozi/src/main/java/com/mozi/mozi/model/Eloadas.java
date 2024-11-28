@@ -7,15 +7,14 @@ import jakarta.persistence.*;
 public class Eloadas {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Automatikusan generált id
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "film_id") // Az oszlop pontos neve az adatbázisban
-    private Long filmId;
+    @Column(name = "filmid", nullable = false)
+    private Long filmid;
 
-    @Column(name = "mozi_id")
-    private Long moziId;
+    @Column(name = "moziid", nullable = false)
+    private Long moziid;
 
     @Column(name = "datum")
     private String datum;
@@ -35,20 +34,20 @@ public class Eloadas {
         this.id = id;
     }
 
-    public Long getFilmId() {
-        return filmId;
+    public Long getFilmid() {
+        return filmid;
     }
 
-    public void setFilmId(Long filmId) {
-        this.filmId = filmId;
+    public void setFilmid(Long filmid) {
+        this.filmid = filmid;
     }
 
-    public Long getMoziId() {
-        return moziId;
+    public Long getMoziid() {
+        return moziid;
     }
 
-    public void setMoziId(Long moziId) {
-        this.moziId = moziId;
+    public void setMoziid(Long moziid) {
+        this.moziid = moziid;
     }
 
     public String getDatum() {

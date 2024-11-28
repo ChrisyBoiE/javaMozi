@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
 </head>
 <body>
+<!-- Navigációs sáv -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" href="/">Mozi Portál</a>
@@ -18,6 +19,9 @@
                 <!-- Bejelentkezett felhasználó neve -->
                 <li class="nav-item" th:if="${session.user != null}">
                     <span class="navbar-text text-white me-3">Bejelentkezett: <b th:text="${session.user.username}"></b></span>
+                </li>
+                <li class="nav-item" th:if="${session.user != null}">
+                    <a class="nav-link" href="/data">Adatok</a>
                 </li>
                 <!-- Kilépés -->
                 <li class="nav-item" th:if="${session.user != null}">

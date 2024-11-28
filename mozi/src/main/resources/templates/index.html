@@ -18,6 +18,9 @@
         <li class="nav-item" th:if="${session.user != null}">
           <span class="navbar-text text-white me-3">Bejelentkezett: <b th:text="${session.user.username}"></b></span>
         </li>
+        <li class="nav-item" th:if="${session.user != null}">
+          <a class="nav-link" href="/data">Adatok</a>
+        </li>
         <!-- Kilépés -->
         <li class="nav-item" th:if="${session.user != null}">
           <a class="nav-link" href="/auth/logout">Kilépés</a>
