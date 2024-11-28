@@ -52,15 +52,11 @@
     <h1>Kapcsolatfelvétel</h1>
 
     <!-- Hibaüzenet -->
-    <div th:if="${errorMessage != null}" class="alert alert-danger" role="alert">
-        <p th:text="${errorMessage}"></p>
-    </div>
-
+    <div class="alert alert-danger" th:if="${errorMessage}" th:text="${errorMessage}"></div>
     <!-- Sikerüzenet -->
-    <div th:if="${successMessage != null}" class="alert alert-success" role="alert">
-        <p th:text="${successMessage}"></p>
-    </div>
+    <div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>
 
+    <!-- Form -->
     <form action="/contact" method="post" th:object="${message}">
         <div class="mb-3">
             <label for="name" class="form-label">Név</label>
